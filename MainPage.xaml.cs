@@ -1,4 +1,17 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// <copyright file="MainPage.xaml.cs" company="Microsoft Corporation">
+// Copyright (c) Microsoft Corporation.
+// All rights reserved.
+// THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+// KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+// </copyright>
+// ----------------------------------------------------------------------
+// <summary>MainPage.xaml.cs</summary>
+// ----------------------------------------------------------------------
+
+using System;
 using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Media;
@@ -16,20 +29,13 @@ using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
 /// <summary>
-/// References:
-/// http://mtaulty.com/2016/02/09/windows-10-uwp-audiographrecording-microphone-to-wav-file/
-/// https://github.com/Microsoft/Windows-universal-samples/tree/master/Samples/AudioCreation
-/// https://msdn.microsoft.com/en-us/library/windows/apps/windows.media.audio.audiograph.aspx
-/// https://msdn.microsoft.com/en-us/windows/uwp/audio-video-camera/audio-graphs
-/// https://msdn.microsoft.com/en-us/windows/uwp/networking/websockets
-/// 
 /// 
 /// </summary>
 
 namespace RealTimeSpeechTranslateUWPSample
 {
     /// <summary>
-    /// Page to showcase the Machine Translation Translate Speech API
+    /// App to showcase the Machine Translation Translate Speech API and AudioGraph
     /// </summary>
     public sealed partial class MainPage : Page
     {
