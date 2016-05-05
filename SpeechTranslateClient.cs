@@ -38,7 +38,7 @@ namespace RealTimeSpeechTranslateUWPSample
 
         const string AzureMarketPlaceUrl = "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13";
         const string AzureScope = "http://api.microsofttranslator.com";
-        const string SpeechTranslateUrl = @"wss://dev.microsofttranslator.com/speech/translate?from={0}&to={1}{2}";
+        const string SpeechTranslateUrl = @"wss://dev.microsofttranslator.com/speech/translate?from={0}&to={1}{2}&api-version=1.0";
         private static readonly Encoding UTF8 = new UTF8Encoding();
 
         private MessageWebSocket webSocket;
