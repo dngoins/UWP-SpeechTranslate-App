@@ -28,6 +28,7 @@ using Windows.Media;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
+using Microsoft.Translator.Samples;
 
 namespace RealTimeSpeechTranslateUWPSample
 {
@@ -36,33 +37,28 @@ namespace RealTimeSpeechTranslateUWPSample
         public delegate void OnTextToSpeechData(AudioFrame frame);
         public delegate void OnSpeechTranslateResult(Result result);
 
-        const string AzureMarketPlaceUrl = "https://datamarket.accesscontrol.windows.net/v2/OAuth2-13";
-        const string AzureScope = "http://api.microsofttranslator.com";
         const string SpeechTranslateUrl = @"wss://dev.microsofttranslator.com/speech/translate?from={0}&to={1}{2}&api-version=1.0";
         private static readonly Encoding UTF8 = new UTF8Encoding();
 
         private MessageWebSocket webSocket;
         private DataWriter dataWriter;
-        private string clientId;
         private string clientSecret;
         private Timer timer;
         private OnTextToSpeechData onTextToSpeechData;
         private OnSpeechTranslateResult onSpeechTranslateResult;
 
         /// <summary>
-        /// Create a speech tarnslate client that will talk to the MT Service
+        /// Create a speech translation client that will talk to the Translator Service
         /// </summary>
-        /// <param name="clientId"></param>
         /// <param name="clientSecret"></param>
-        public SpeechTranslateClient(string clientId, string clientSecret)
+        public SpeechTranslateClient(string clientSecret)
         {
-            this.clientId = clientId;
             this.clientSecret = clientSecret;
         }
 
         /// <summary>
         /// Connect to the server before sending audio
-        /// It will get the ADM credentials and add it to the header
+        /// It will get the authentication credentials and add it to the header
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
@@ -72,27 +68,11 @@ namespace RealTimeSpeechTranslateUWPSample
             this.onTextToSpeechData = onTextToSpeechData;
             this.onSpeechTranslateResult = onSpeechTranslateResult;
 
-            // get Azure Data Market token
-            using (var httpClient = new HttpClient())
-            {
-                var response = await httpClient.PostAsync(AzureMarketPlaceUrl, new FormUrlEncodedContent(
-                    new KeyValuePair<string, string>[] {
-                        new KeyValuePair<string,string>("grant_type", "client_credentials"),
-                        new KeyValuePair<string,string>("client_id", clientId),
-                        new KeyValuePair<string,string>("client_secret", clientSecret),
-                        new KeyValuePair<string,string>("scope", AzureScope),
-                    }));
+            // Get Azure authentication token
+            var tokenProvider = new AzureAuthToken(this.clientSecret);
+            var bearerToken = await tokenProvider.GetAccessTokenAsync();
 
-                response.EnsureSuccessStatusCode();
-
-                var json = await response.Content.ReadAsStringAsync();
-
-                dynamic admAccessToken = JObject.Parse(json);
-
-                var admToken = "Bearer " + admAccessToken.access_token;
-
-                this.webSocket.SetRequestHeader("Authorization", admToken);
-            }
+            this.webSocket.SetRequestHeader("Authorization", bearerToken);
 
             var url = String.Format(SpeechTranslateUrl, from, to, voice == null ? String.Empty : "&features=texttospeech&voice=" + voice);
 

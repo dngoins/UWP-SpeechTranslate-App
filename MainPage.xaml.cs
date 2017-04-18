@@ -39,8 +39,7 @@ namespace RealTimeSpeechTranslateUWPSample
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        const string AzureDataMarketClientId = "[Enter your Client Id here]";
-        const string AzureDataMarketClientSecret = "[Enter your Client Secret here]";
+        const string AzureSecretKey = "[Enter your Client Secret here]";
 
         private Dictionary<string, List<ComboBoxItem>> langVoiceDict = new Dictionary<string, List<ComboBoxItem>>();
 
@@ -48,9 +47,7 @@ namespace RealTimeSpeechTranslateUWPSample
         {
             this.InitializeComponent();
             this.ViewModel = new ResultViewModel();
-            this.speechTranlateClient = new SpeechTranslateClient(
-                AzureDataMarketClientId,
-                AzureDataMarketClientSecret);
+            this.speechTranlateClient = new SpeechTranslateClient(AzureSecretKey);
         }
 
         /// <summary>
