@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="fe6b7de9-620b-4937-a57d-cf2d743fc4ad" Publisher="CN=alcheng" Version="1.0.0.0" />
+  <Identity Name="fe6b7de9-620b-4937-a57d-cf2d743fc4ad" Publisher="CN=Test" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="fe6b7de9-620b-4937-a57d-cf2d743fc4ad" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>RealTimeSpeechTranslateUWPSample</DisplayName>
-    <PublisherDisplayName>alcheng</PublisherDisplayName>
+    <PublisherDisplayName>Demo</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
